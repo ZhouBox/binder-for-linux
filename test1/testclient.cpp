@@ -3,6 +3,7 @@
 #include "Itestservice.hpp"
 
 #include <iostream>
+#include <string>
 
 int main(int argc, char* argv[])
 {
@@ -22,6 +23,19 @@ int main(int argc, char* argv[])
     auto _str = ts->testfun(String16("binder"));
     ALOGI(_str);
     ALOGD(_str);
-    std::cout << _str << std::endl;
+    std::cout << _str.string() << std::endl;
+
+
+    std::string _in;
+    while(std::cin >> _in){
+        if (_in == "q") {
+            break;
+        }
+        auto _str = ts->testfun(String16(_in.c_str()));
+        std::cout << _str.string() << std::endl;
+        _in = "";
+        std::cout << "input `q` exit!" << std::endl;
+    }
+    
     return 0;
 }

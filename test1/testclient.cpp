@@ -1,5 +1,6 @@
 #include <binder/IServiceManager.h>
 #include <utils/Log.h>
+#include <utils/String8.h>
 #include "Itestservice.hpp"
 
 #include <iostream>
@@ -20,10 +21,10 @@ int main(int argc, char* argv[])
         std::cout << "testserviceclient -2" << std::endl;
         return -2;
     }
-    auto _str = ts->testfun(String16("binder"));
+    String16 _str = ts->testfun(String16("binder"));
     ALOGI(_str);
     ALOGD(_str);
-    std::cout << _str.string() << std::endl;
+    std::cout << String8(_str).string() << std::endl;
 
 
     std::string _in;
@@ -31,8 +32,8 @@ int main(int argc, char* argv[])
         if (_in == "q") {
             break;
         }
-        auto _str = ts->testfun(String16(_in.c_str()));
-        std::cout << _str.string() << std::endl;
+        String16 _str = ts->testfun(String16(_in.c_str()));
+        std::cout << String8(_str).string() << std::endl;
         _in = "";
         std::cout << "input `q` exit!" << std::endl;
     }

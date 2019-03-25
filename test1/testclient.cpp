@@ -16,5 +16,6 @@ int main(int argc, char* argv[])
     }
     auto _str = ts->testfun(String16("binder"));
     ALOGI(_str);
+    ALOGD(_str);
     return 0;
 }

@@ -5,6 +5,7 @@
 #include "IGCodeParser.hpp"
 
 #include <list>
+#include <thread>
 
 using namespace android;
 
@@ -17,6 +18,7 @@ class GCodeParser : public BnGCodeParser
     public:
     GCodeParser(pid_t pid, const sp<IGCodeParserClient> client);
     virtual uint32_t current_line() const;
+    void notify(const String16& code);
 
     private:
     pid_t m_client_pid;
@@ -33,6 +35,10 @@ class GCodeParserService : public BnGCodeParserService
     virtual sp<IGCodeParser> create_client(pid_t pid, const sp<IGCodeParserClient> &client);
     virtual uint32_t current_line() const;
 
+    void start_parser();
+
+    void notify(const String16& code);
+
 
   private:
     GCodeParserService()
@@ -42,11 +48,12 @@ class GCodeParserService : public BnGCodeParserService
 
     ~GCodeParserService()
     {
-        
+
     }
 
   private:
     std::list<sp<IGCodeParser>> m_parsers;
+    std::shared_ptr<std::thread> m_parser_thread;
 };
 
 } // namespace ICNC

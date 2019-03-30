@@ -35,7 +35,7 @@ class GCodeParserService : public BnGCodeParserService
     virtual sp<IGCodeParser> create_client(pid_t pid, const sp<IGCodeParserClient> &client);
     virtual uint32_t current_line() const;
 
-    void start_parser();
+    void start_parse();
 
     void notify(const String16& code);
 

@@ -53,7 +53,7 @@ void GCodeParserService::notify(const String16 &code)
     }
 }
 
-void GCodeParserService::start_parser()
+void GCodeParserService::start_parse()
 {
     m_parser_thread.reset(new std::thread([]() {
         while (1)

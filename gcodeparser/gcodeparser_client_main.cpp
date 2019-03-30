@@ -4,9 +4,12 @@
 
 
 #include <binder/IServiceManager.h>
+#include <binder/IPCThreadState.h>
+#include <binder/ProcessState.h>
 #include <utils/String8.h>
-#include <iostream>
+#include <utils/Looper.h>
 
+#include <iostream>
 
 #include <unistd.h>
 
@@ -45,17 +48,10 @@ int main(int agrc, char* argv[])
     sp<IGCodeParser> gcodep =  gcodes->create_client(getpid(), gcodec);
     std::cout << gcodep->current_line() << std::endl;
 
+    ProcessState::self()->startThreadPool();
+    IPCThreadState::self()->joinThreadPool();
 
 
-
-    while(1) {
-        std::string _cin;
-        std::cin >> _cin;
-        if (_cin == "q") {
-            break;
-        }
-        _cin = "";
-    }
      
 
     return 0;

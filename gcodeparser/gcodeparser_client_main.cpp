@@ -15,7 +15,7 @@ using namespace ICNC;
 int main(int agrc, char* argv[])
 {
     sp<IServiceManager> sm = defaultServiceManager();
-    sp<IBinder> binder = sm->getService(String16("gcodeservice"));
+    sp<IBinder> binder = sm->getService(String16("gcodeparser"));
     if (binder.get() == NULL) {
         return -1;
     }
